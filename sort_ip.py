@@ -86,7 +86,8 @@ def sort_ip_addresses_from_folder(input_folder, output_file, mode='sorted', port
 
             print(f"Random subset ({count} IPs) saved to {random_output_path}")
         else:
-            print("The entered number is not valid, so the random file could not be created.")
+            print(
+                "The entered number is not valid, so the random file could not be created.")
     else:
         print("The random file was not created.")
 
