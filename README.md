@@ -2,7 +2,7 @@
 
 A lightweight Python tool for extracting, deduplicating, sorting, randomizing, and exporting IPv4 addresses from multiple files.
 
-Designed for handling large IP lists collected from logs, scan results, configuration files, or any text-based source.
+Designed for handling large IP lists collected from logs, scan results, configuration files, proxy lists, server inventories, or any text-based source.
 
 ---
 
@@ -24,7 +24,9 @@ Designed for handling large IP lists collected from logs, scan results, configur
 
 ✔ Skip corrupted or unreadable files
 
-✔ Automatically clean processed input files
+✔ Optional cleanup of processed input files
+
+✔ No third-party dependencies required
 
 ---
 
@@ -37,6 +39,7 @@ Designed for handling large IP lists collected from logs, scan results, configur
 - Building CDN node lists
 - Network administration tasks
 - Data collection and normalization
+- Organizing large IP datasets
 
 ---
 
@@ -46,12 +49,12 @@ The script scans every file inside the `input` directory and:
 
 1. Reads file content
 2. Extracts valid IPv4 addresses
-3. Removes duplicates
+3. Removes duplicate entries
 4. Sorts or randomizes the result
-5. Optionally appends a port
+5. Optionally appends a custom port
 6. Saves the final list into the `result` directory
 7. Optionally creates a random subset file
-8. Deletes processed source files
+8. Asks whether processed source files should be deleted
 
 ---
 
@@ -81,9 +84,9 @@ git clone https://github.com/yourusername/ip-extractor-sorter.git
 cd ip-extractor-sorter
 ```
 
-No external dependencies are required.
+No external packages are required.
 
-Python standard libraries used:
+The script uses only Python standard libraries:
 
 - ipaddress
 - os
@@ -92,26 +95,42 @@ Python standard libraries used:
 
 ---
 
+## Requirements
+
+- Python 3.8 or newer
+
+Verify your Python version:
+
+```bash
+python --version
+```
+
+---
+
 ## Usage
 
-Run:
+Run the script:
 
 ```bash
 python sort_ip.py
 ```
 
-### Step 1
-
-Enter the output filename:
+### Step 1 — Output File Name
 
 ```text
 Please enter the output file name:
 ips
 ```
 
-### Step 2
+Result:
 
-Choose sorting mode:
+```text
+result/ips.txt
+```
+
+---
+
+### Step 2 — Sorting Mode
 
 ```text
 Choose sorting mode (sorted/random):
@@ -125,16 +144,16 @@ Available modes:
 | sorted | Sort IPs numerically |
 | random | Shuffle IPs randomly |
 
-### Step 3
+---
 
-Optional port assignment:
+### Step 3 — Optional Port Assignment
 
 ```text
-Enter a port number if you want to add it:
+Enter a port number if you want to add it (or press Enter to skip):
 443
 ```
 
-Result:
+Output example:
 
 ```text
 1.1.1.1:443
@@ -144,9 +163,9 @@ Result:
 
 ---
 
-## Random Subset Generation
+### Step 4 — Optional Random Subset
 
-After creating the main output file, the script can generate an additional random subset.
+After generating the main output file, the script can create an additional random subset.
 
 Example:
 
@@ -155,19 +174,49 @@ Number of random IPs:
 100
 ```
 
-Output:
+Generated file:
 
 ```text
 result/random_ips.txt
 ```
 
-This file contains 100 randomly selected IP addresses from the final dataset.
+This file contains a randomly selected subset from the processed IP list.
+
+---
+
+### Step 5 — Optional Cleanup
+
+After processing is complete:
+
+```text
+Do you want to delete the processed files from the input folder? (y/n)
+```
+
+Options:
+
+```text
+y
+```
+
+or
+
+```text
+yes
+```
+
+Deletes all processed files from the input directory.
+
+```text
+n
+```
+
+Keeps all source files unchanged.
 
 ---
 
 ## Example Workflow
 
-Input files:
+### Input Files
 
 ```text
 input/file1.txt
@@ -175,7 +224,7 @@ input/file2.txt
 input/file3.txt
 ```
 
-Extracted IPs:
+### Raw Content
 
 ```text
 8.8.8.8
@@ -184,13 +233,15 @@ Extracted IPs:
 9.9.9.9
 ```
 
-Final output:
+### Output
 
 ```text
 1.1.1.1
 8.8.8.8
 9.9.9.9
 ```
+
+Duplicates are removed automatically.
 
 ---
 
@@ -200,44 +251,50 @@ Final output:
 - Invalid addresses are ignored.
 - Duplicate entries are removed automatically.
 - Files that cannot be read are skipped.
-- Source files are deleted after processing.
 - Supports UTF-8 and mixed text files.
+- Source files are deleted only if the user confirms deletion.
+- Existing result files with the same name will be overwritten.
 
 ---
 
-## Requirements
+## Performance
 
-- Python 3.8 or newer
+The tool is suitable for processing:
 
-Check your version:
+- Small IP lists
+- Medium-sized datasets
+- Large collections of text files
 
-```bash
-python --version
-```
+Performance depends primarily on:
+
+- Number of files
+- Total file size
+- Storage speed
 
 ---
 
 ## Future Improvements
 
 - IPv6 support
-- Export to CSV
-- Export to JSON
+- CSV export
+- JSON export
 - Multi-threaded processing
 - GUI version
-- Custom filtering rules
+- Advanced filtering options
+- CIDR range support
 
 ---
 
 ## License
 
-This project is released under the MIT License.
+MIT License
 
-Feel free to use, modify, and distribute it.
+You are free to use, modify, distribute, and integrate this project into your own workflows.
 
 ---
 
 ## Disclaimer
 
-This tool is intended for educational, research, and network administration purposes only.
+This project is provided for educational, research, and network administration purposes.
 
-Users are responsible for complying with all applicable laws and regulations when processing network-related data.
+Users are responsible for ensuring compliance with all applicable laws, regulations, and policies when processing network-related data.
