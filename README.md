@@ -254,6 +254,7 @@ Duplicates are removed automatically.
 - Supports UTF-8 and mixed text files.
 - Source files are deleted only if the user confirms deletion.
 - Existing result files with the same name will be overwritten.
+- For too many IPs, You can use chunker version for splitting files into some separated parts.
 
 ---
 
